@@ -1,0 +1,62 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html><head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<!-- Standard Meta -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<link rel="shortcut icon" type="image/png"  href="{% static 'favicon.png' %}">
+
+	<title>Emprenred: {{HeadTitle.section}}</title>
+
+	<link rel="stylesheet" href="{% static 'Semantic-UI/semantic.css' %}" >
+	<link rel="stylesheet" href="{% static 'css/base_web.css' %}" >
+
+	<script type="text/javascript" src="{% static 'jQuery/jquery-3.1.1.js' %}"></script>
+	<script type="text/javascript" src="{% static 'Semantic-UI/semantic.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/base_web.js' %}"></script>
+
+	{% block headScript %}{% endblock %}
+
+</head>
+<body class="pushable">
+
+	<!-- Following Menu -->
+	<div class="ui top fixed menu {% if isHome %}transition hidden{% endif %}">
+		<div class="ui container">			
+			<a class="toc item">
+				<i class="sidebar icon"></i>Menú
+			</a>
+			<a class="item" href="/">Inicio</a>
+			<div class="right item">
+				<a href="/">logo</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- Sidebar Menu -->
+	<div class="ui vertical inverted sidebar menu left">
+		<a class="item" href="/">Inicio</a>
+		<div class="right item">
+			<a href="/">logo</a>
+		</div>
+	</div>
+
+<!-- Page Contents -->
+<div class="pusher">	
+
+	{% block bodyContent %}{% endblock %}
+	
+	<div class="ui inverted vertical footer segment">
+		<div class="ui container">
+			<div class="ui stackable inverted divided equal height stackable grid">
+				<div class="twelve wide column">
+				</div>
+				<div class="four wide column">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body></html>
