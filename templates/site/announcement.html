@@ -1,0 +1,57 @@
+{% extends "site/base.html" %}
+{% load staticfiles %}
+
+
+{% block bodyContent %}
+<div class="ui inverted vertical masthead center aligned segment">
+
+	<div class="ui equal width middle aligned grid">	
+		<div class="three wide wide column">
+			<img class="ui middle aligned small circle image" src="">	
+		</div>
+		<div class="ten wide column">
+			<div class="ui list">
+				<h2>{{anuncio.titulo}} </h2>
+				<div class="item">
+					<i class="user icon"></i>
+					<div class="content">
+						{{anuncio.alumno.user.first_name}} {{anuncio.alumno.user.last_name}}
+					</div>
+				</div>				
+			</div>			
+		</div>
+	</div>
+
+
+</div>
+
+<div>
+	<div class="ui list">
+		<h2>Información</h2>
+		<div class="item">
+			<div class="content">
+				<div class="header">Descripción</div>
+				<div class="description"><p>{{ anuncio.descripcion }}</p></div>
+			</div>
+		</div>
+		<div class="item">
+			<i class="help icon"></i>
+			<div class="content">
+				<div class="header">Fecha creación</div>
+				<div class="description">{{ anuncio.fechaCreacion }}</div>
+			</div>
+		</div>
+		<div class="item">
+			<i class="help icon"></i>
+			<div class="content">
+				<div class="header">Fecha vencimiento</div>
+				<div class="description">{{ anuncio.fechaCreacion|add:anuncio.tiempoVencimiento }}</div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<h2>Etiquetas</h2>
+		<div>{% for etiqueta in anuncio.etiqueta.all %}<a class="ui tag label">{{etiqueta.nombre}}</a>{% endfor %} </div>
+	</div>
+</div>
+{% endblock %}

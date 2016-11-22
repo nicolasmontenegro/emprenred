@@ -1,0 +1,57 @@
+{% extends "site/base.html" %}
+{% load staticfiles %}
+
+
+{% block bodyContent %}
+<div class="ui inverted vertical masthead center aligned segment">
+	<div class="ui equal width middle aligned grid">	
+		<div class="ui text container">
+			<h1 class="ui inverted header">
+				Anuncios
+			</h1>
+			<h2>publicaciones para solicitar u ofrecer trabajos</h2>
+		</div>
+	</div>
+</div>
+
+<div>	
+	<div class="ui divided items">
+	{% for item in anuncios %}
+	<div class="item">
+		<div class="content">
+			<a class="header" href="{% url 'DetalleAnuncio' item.id %}">{{ item.titulo }}</a>
+			<div class="meta">
+				<span class="cinema">creado por {{ item.alumno.user.first_name }} {{ item.alumno.user.last_name }}</span>
+			</div>
+			<div class="description">
+				<p>{{ item.descripcion|truncatechars:500 }}</p>
+			</div>
+			{% if item.etiqueta %}
+			<div class="extra">
+				{% for etiqueta in item.etiqueta.all %}
+				<div class="ui tag label">{{ etiqueta.nombre }}</div>
+				{% endfor %}
+			</div>
+			{% endif %}
+		</div>
+	</div>	
+	{% endfor %}
+	</div>
+
+	<div class="pagination">
+		<span class="step-links">
+			{% if anuncios.has_previous %}
+				<a href="?page={{ contacts.previous_page_number }}">anterior</a>
+			{% endif %}
+
+			<span class="current">
+				Página {{ anuncios.number }} de {{ anuncios.paginator.num_pages }}.
+			</span>
+
+			{% if anuncios.has_next %}
+				<a href="?page={{ anuncios.next_page_number }}">siguiente</a>
+			{% endif %}
+		</span>
+	</div>
+</div>
+{% endblock %}

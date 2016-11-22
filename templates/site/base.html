@@ -30,7 +30,9 @@
 			</a>
 			<a class="item" href="/">Inicio</a>
 			<div class="right item">
-				<a href="/">logo</a>
+				{% if user.is_authenticated %}
+					{{user.first_name}}
+				{% endif %}
 			</div>
 		</div>
 	</div>

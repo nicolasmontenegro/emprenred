@@ -4,8 +4,7 @@
 }
 /*masthead*/
 .masthead.segment {
-	/*min-height: 600px;*/
-	padding-top: 5em;
+	padding: 1.3em 0em;
 }
 .masthead .logo.item img {
 	margin-right: 1em;
@@ -14,13 +13,13 @@
 	margin-left: 0.5em;
 }
 .masthead h1.ui.header {
-	margin-top: 3em;
-	margin-bottom: 0em;
-	font-size: 4em;
+	/*margin-top: 3em;
+	margin-bottom: 0em;*/
+	font-size: 2em;
 	font-weight: normal;
 }
 .masthead h2 {
-	font-size: 1.7em;
+	font-size: 1.2em;
 	font-weight: normal;
 }
 /*submasthead*/
@@ -70,8 +69,8 @@
 	display: none;
 }
 
-.sidebar.menu.left{
-	padding-top: 50px;
+.sidebar.menu.left + .pusher{
+	padding-top: 40px;
 }
 
 

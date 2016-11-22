@@ -18,6 +18,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls, name="LoginAdmin"), 
-    url(r'^profile/', include("alumno.urls"), name="Usuarios"),
+    url(r'^perfil/', include("alumno.urls"), name="Usuarios"),
+    url(r'^anuncio/', include("anuncio.urls"), name="Anuncio"),
     url(r'^', include("home.urls")),
 ]
