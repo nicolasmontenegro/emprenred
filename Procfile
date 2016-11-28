@@ -1,1 +1,1 @@
-web: gunicorn timp_web.wsgi --log-file -
+web: gunicorn emprenred.wsgi --log-file -
