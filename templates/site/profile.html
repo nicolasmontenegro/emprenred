@@ -74,7 +74,7 @@
 	</div>
 	<div>
 		<h2>Etiquetas</h2>
-		<div>{% for etiqueta in Usuario.alumno.etiquetas.all %}<a class="ui tag label">{{etiqueta.nombre}}</a>{% endfor %} </div>
+		<div>{% for etiqueta in Usuario.alumno.etiquetas.all %}<a class="ui tag label" href="{% url 'DetalleEtiqueta' etiqueta.nombre %}">{{etiqueta.nombre}}</a>{% endfor %} </div>
 	</div>
 </div>
 {% endblock %}

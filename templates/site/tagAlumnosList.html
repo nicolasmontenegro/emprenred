@@ -6,10 +6,8 @@
 <div class="ui inverted vertical masthead center aligned segment">
 	<div class="ui equal width middle aligned grid">	
 		<div class="ui text container">
-			<h1 class="ui inverted header">
-				Anuncios
-			</h1>
-			<h2>publicaciones para solicitar u ofrecer trabajos</h2>
+			<h1 class="ui inverted header">Etiqueta <i>{{etiqueta.nombre}}</i></h1>
+			<h2>categoria <i>{{etiqueta.categoria.nombre}}</i></h2>
 		</div>
 	</div>
 </div>
@@ -21,7 +19,7 @@
 		<div class="content">
 			<a class="header" href="{% url 'DetalleAnuncio' item.id %}">{{ item.titulo }}</a>
 			<div class="meta">
-				<span class="cinema">creado por <a href="{% url 'ViewProfle' item.usuario.pk %}">{{ item.usuario.first_name }} {{ item.usuario.last_name }}</a></span>
+				<span class="cinema">creado por <a href="{% url 'ViewProfle' anuncio.usuario.id %}">{{ item.usuario.first_name }} {{ item.usuario.last_name }}</a></span>
 			</div>
 			<div class="description">
 				<p>{{ item.descripcion|truncatechars:500 }}</p>

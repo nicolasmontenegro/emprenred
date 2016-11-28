@@ -1,10 +1,12 @@
-from django.shortcuts import render, get_list_or_404, get_object_or_404
+from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required, permission_required
 from django.db.models import DateTimeField, ExpressionWrapper, F
+from django.http import Http404
 import django
 
 from . import models as modelAnuncio
+from . import forms as formAnuncio
 
 templateObject = {
     "HeadTitle":{
@@ -16,10 +18,13 @@ templateObject = {
 
 @login_required
 def pages(request):
-
-    anunciosList = get_list_or_404(modelAnuncio.Anuncio)
-    expression = F('fechaCreacion') + F('tiempoVencimiento')
-    anunciosList = anunciosList.annotate(delta=ExpressionWrapper(expression, DateTimeField())).filter(delta__gt=django.utils.timezone.now()) 
+    anunciosList = modelAnuncio.Anuncio.objects.all()
+    try:   
+        expression = F('fechaCreacion') + F('tiempoVencimiento')
+        anunciosList = anunciosList.annotate(delta=ExpressionWrapper(expression, DateTimeField()))
+        anunciosList = anunciosList.filter(delta__gt=django.utils.timezone.now()) 
+    except:
+        raise Http404("No hay anuncios que mostrar.")
 
     paginator = Paginator(anunciosList, 25)
     page = request.GET.get('page')
@@ -36,7 +41,19 @@ def pages(request):
 
 @login_required
 def create(request):
-    pass
+    if request.method == "POST":
+        form = formAnuncio.AnuncioForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.usuario = request.user
+            post.save()
+            return redirect("DetalleAnuncio", id=post.id)
+        else:
+            print (form.errors)
+    else:
+        form = formAnuncio.AnuncioForm()
+    return render(request, 'site/announcementCreate.html', {'form': form})
+
 
 @login_required
 def detail(request, id):

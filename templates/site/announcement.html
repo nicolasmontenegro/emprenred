@@ -14,9 +14,9 @@
 				<h2>{{anuncio.titulo}} </h2>
 				<div class="item">
 					<i class="user icon"></i>
-					<div class="content">
-						{{anuncio.alumno.user.first_name}} {{anuncio.alumno.user.last_name}}
-					</div>
+					<a class="content" href="{% url 'ViewProfle' anuncio.usuario.id %}">
+						{{anuncio.usuario.first_name}} {{anuncio.usuario.last_name}}
+					</a>
 				</div>				
 			</div>			
 		</div>
@@ -51,7 +51,11 @@
 	</div>
 	<div>
 		<h2>Etiquetas</h2>
-		<div>{% for etiqueta in anuncio.etiqueta.all %}<a class="ui tag label">{{etiqueta.nombre}}</a>{% endfor %} </div>
+		<div>
+		{% if anuncio.etiqueta.all %}
+		{% for etiqueta in anuncio.etiqueta.all %}<a class="ui tag label" href="{% url 'DetalleEtiqueta' etiqueta.nombre %}">{{etiqueta.nombre}}</a>{% endfor %}
+		{% else %}No hay etiquetas asociadas{% endif %}
+		</div>
 	</div>
 </div>
 {% endblock %}

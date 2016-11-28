@@ -31,7 +31,7 @@
 			<a class="item" href="/">Inicio</a>
 			<div class="right item">
 				{% if user.is_authenticated %}
-					{{user.first_name}}
+					<a href="{% url 'ViewMyProfle' %}">{{user.first_name}}</a>
 				{% endif %}
 			</div>
 		</div>

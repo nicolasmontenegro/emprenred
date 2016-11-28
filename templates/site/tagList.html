@@ -1,0 +1,92 @@
+{% extends "site/base.html" %}
+{% load staticfiles %}
+
+
+{% block bodyContent %}
+<div class="ui inverted vertical masthead center aligned segment">
+	<div class="ui equal width middle aligned grid">	
+		<div class="ui text container">
+			<h1 class="ui inverted header">Etiqueta <i>{{etiqueta.nombre}}</i></h1>
+			<h2>categoria <i>{{etiqueta.categoria.nombre}}</i></h2>
+		</div>
+	</div>
+</div>
+
+<div>
+	<h2>Anuncios</h2>	
+	<div class="ui divided items">	
+	{% for item in anuncios %}
+	<div class="item">
+		<div class="content">
+			<a class="header" href="{% url 'DetalleAnuncio' item.id %}">{{ item.titulo }}</a>
+			<div class="meta">
+				<span class="cinema">creado por <a href="{% url 'ViewProfle' item.usuario.pk %}">{{ item.usuario.first_name }} {{ item.usuario.last_name }}</a></span>
+			</div>
+			<div class="description">
+				<p>{{ item.descripcion|truncatechars:500 }}</p>
+			</div>
+			{% if item.etiqueta %}
+			<div class="extra">
+				{% for etiqueta in item.etiqueta.all %}
+				<a class="ui tag label" href="{% url 'DetalleEtiqueta' etiqueta.nombre %}">{{ etiqueta.nombre }}</a>
+				{% endfor %}
+			</div>
+			{% endif %}
+		</div>
+	</div>	
+	{% endfor %}
+	{% if anuncios.has_next %}
+		<a href="?page={{ url 'EtiquetaAnuncios' etiqueta.nombre }}">ver todos</a>
+	{% else %}
+		no hay más anuncios
+	{% endif %}
+	</div>
+
+	<h2>Alumnos</h2>
+	<div class="ui divided items">	
+		{% for item in alumnos %}
+		<div class="item">
+			<div class="content">
+				<a class="ui tiny image">
+					<img src="">
+				</a>
+				<div class="content">
+					<a class="header" href="{% url 'ViewProfle' item.user.pk %}"><h3>{{ item.user.first_name }} {{ item.user.last_name }}</h3></a>
+					<div class="description">	
+						<div class="ui list">
+							<div class="item">
+								<i class="university icon"></i>
+								<div class="content">
+									{{item.carrera.nombre}}
+								</div>
+							</div>
+							<div class="item">
+								<i class="university icon"></i>
+								<div class="content">
+									{{item.annoIngreso}}
+								</div>
+							</div>
+							<div class="item">
+								{% if item.etiquetas %}
+								<div class="extra">
+									{% for etiqueta in item.etiquetas.all %}
+									<a class="ui tag label" href="{% url 'DetalleEtiqueta' etiqueta.nombre %}">{{ etiqueta.nombre }}</a>
+									{% endfor %}
+								</div>
+								{% endif %}
+							</div>		
+						</div>		  
+					</div>
+				</div>
+			</div>	
+		</div>
+		{% endfor %}
+		{% if alumnos.has_next %}
+		<a href="?page={{ url 'EtiquetaAlumnos' etiqueta.nombre }}">ver todos</a>
+		{% else %}
+		no hay más alumnos
+		{% endif %}
+	</div>
+
+</div>
+{% endblock %}

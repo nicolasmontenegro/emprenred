@@ -1,0 +1,23 @@
+{% extends "site/base.html" %}
+{% load staticfiles %}
+
+
+{% block bodyContent %}
+<div class="ui inverted vertical masthead center aligned segment">
+	<div class="ui equal width middle aligned grid">	
+		<div class="ui text container">
+			<h1 class="ui inverted header">
+				Crear anuncio
+			</h1>
+		</div>
+	</div>
+</div>
+
+<div>	
+	<form method="POST" class="post-form">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit">Save</button>
+	</form>
+</div>
+{% endblock %}

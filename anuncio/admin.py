@@ -25,8 +25,8 @@ class VencimientoFilter(admin.SimpleListFilter):
 
 class AnuncioAdmin(admin.ModelAdmin):
     #fields = ('titulo,' 'fechaCreacion', 'tiempoVencimiento',) 
-    list_display = ('id', 'fechaCreacion', 'tiempoVencimiento', 'alumno',) 
-    list_filter = (VencimientoFilter, "alumno",)
+    list_display = ('id', 'fechaCreacion', 'tiempoVencimiento', 'usuario',) 
+    list_filter = (VencimientoFilter, 'usuario',)
     ordering = ('-id',)
 
 admin.site.register(models.Anuncio, AnuncioAdmin)
